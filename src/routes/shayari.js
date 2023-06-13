@@ -10,22 +10,22 @@ const router = express.Router();
 
 router.get('/tag/:tag', async (req, res) => {
 	const tag = req.params.tag;
-	const lang = req.query?.lang || 'en';
-	const shayaris = await getShayarisByTag(tag, lang);
+	const language = req.query?.lang || 'en';
+	const shayaris = await getShayarisByTag(tag, language);
 	res.status(200).json(shayaris);
 });
 
 router.get('/poet/:poet', async (req, res) => {
 	const poet = req.params.poet;
-	const lang = req.query?.lang || 'en';
-	const shayaris = await getShayarisByPoet(poet, lang);
+	const language = req.query?.lang || 'en';
+	const shayaris = await getShayarisByPoet(poet, language);
 	res.status(200).json(shayaris);
 });
 
 router.get('/poet/:poet/top20', async (req, res) => {
 	const poet = req.params.poet;
-	const lang = req.query?.lang || 'en';
-	const shayaris = await getTop20ShayarisByPoet(poet, lang);
+	const language = req.query?.lang || 'en';
+	const shayaris = await getTop20ShayarisByPoet(poet, language);
 	res.status(200).json(shayaris);
 });
 
