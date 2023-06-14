@@ -4,6 +4,7 @@ import languageMiddleware from './middlewares/language.js';
 import ghazal from './routes/ghazal.js';
 import nazm from './routes/nazm.js';
 import shayari from './routes/shayari.js';
+import word from './routes/word.js';
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -16,6 +17,7 @@ app.use(languageMiddleware);
 app.use('/ghazal', ghazal);
 app.use('/nazm', nazm);
 app.use('/shayari', shayari);
+app.use('/word-of-the-day', word);
 app.use((req, res) => {
 	res.status(404).json({ error: 'Endpoint not found' });
 });
