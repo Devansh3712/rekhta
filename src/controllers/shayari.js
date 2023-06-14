@@ -14,6 +14,7 @@ const getShayaris = async (rekhtaUrl, isSinglePoet) => {
 			const shayari = quote
 				.querySelector('.c')
 				.innerText.replace(/(\r\n|\n|\r)/gm, '');
+			const url = quote.querySelector('.shareSocial').getAttribute('data-url');
 			if (!isSinglePoet) {
 				const poet = quote
 					.querySelector('.poetName')
@@ -23,9 +24,9 @@ const getShayaris = async (rekhtaUrl, isSinglePoet) => {
 						return word.replace(word[0], word[0].toUpperCase());
 					})
 					.join(' ');
-				return { shayari, poet };
+				return { shayari, poet, url };
 			}
-			return shayari;
+			return { shayari, url };
 		});
 	}, isSinglePoet);
 	await browser.close();
