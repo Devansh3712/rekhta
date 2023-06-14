@@ -34,21 +34,21 @@ const getShayaris = async (rekhtaUrl, isSinglePoet) => {
 };
 
 const getShayarisByTag = async (tag, language) => {
-	tag = tag.toLowerCase().replace(' ', '-');
+	tag = tag.toLowerCase().replaceAll(' ', '-');
 	const url = `https://www.rekhta.org/tags/${tag}-shayari?lang=${language}`;
 	const shayaris = await getShayaris(url, false);
 	return shayaris;
 };
 
 const getShayarisByPoet = async (poet, language) => {
-	poet = poet.toLowerCase().replace(' ', '-');
+	poet = poet.toLowerCase().replaceAll(' ', '-');
 	const url = `https://www.rekhta.org/poets/${poet}/couplets?lang=${language}`;
 	const shayaris = await getShayaris(url, true);
 	return shayaris;
 };
 
 const getTop20ShayarisByPoet = async (poet, language) => {
-	poet = poet.toLowerCase().replace(' ', '-');
+	poet = poet.toLowerCase().replaceAll(' ', '-');
 	const url = `https://www.rekhta.org/poets/${poet}/t20?lang=${language}`;
 	const shayaris = await getShayaris(url, true);
 	return shayaris;
