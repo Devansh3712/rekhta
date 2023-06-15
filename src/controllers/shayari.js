@@ -13,7 +13,8 @@ const getShayaris = async (rekhtaUrl, isSinglePoet) => {
 		return Array.from(shayariList).map((quote) => {
 			const shayari = quote
 				.querySelector('.c')
-				.innerText.replace(/(\r\n|\n|\r)/gm, '');
+				.innerText.replace(/(\r\n|\n|\r)/gm, '')
+				.trim();
 			const url = quote.querySelector('.shareSocial').getAttribute('data-url');
 			if (!isSinglePoet) {
 				const poet = quote

@@ -29,7 +29,8 @@ const getGhazals = async (rekhtaUrl, selector, isSinglePoet) => {
 				const ghazal = document
 					.querySelector('.poemPageContentBody')
 					.innerText.replace(/(\r\n|\n|\r)/gm, '')
-					.split('VIDEOS')[0];
+					.split('VIDEOS')[0]
+					.trim();
 				if (!isSinglePoet) {
 					const poet = document
 						.querySelector('.ghazalAuthor')

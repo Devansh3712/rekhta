@@ -30,7 +30,8 @@ const getNazms = async (rekhtaUrl, selector, isSinglePoet) => {
 					.querySelector('.poemPageContentBody')
 					.innerText.replace(/(\r\n|\n|\r)/gm, '')
 					.split('VIDEOS')[0]
-					.split('RECITATIONS')[0];
+					.split('RECITATIONS')[0]
+					.trim();
 				if (!isSinglePoet) {
 					const poet = document
 						.querySelector('.ghazalAuthor')
