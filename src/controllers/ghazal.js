@@ -30,6 +30,7 @@ const getGhazals = async (rekhtaUrl, selector, isSinglePoet) => {
 					.querySelector('.poemPageContentBody')
 					.innerText.replace(/(\r\n|\n|\r)/gm, '')
 					.split('VIDEOS')[0]
+					.split('RECITATIONS')[0]
 					.trim();
 				if (!isSinglePoet) {
 					const poet = document
@@ -60,9 +61,9 @@ const getGhazalsByTag = async (tag, language) => {
 	return ghazals;
 };
 
-const getGhazalsByPoet = async (poet, language) => {
+const getGhazalsByPoet = async (poet, language, sort) => {
 	poet = poet.toLowerCase().replaceAll(' ', '-');
-	const url = `https://www.rekhta.org/poets/${poet}/ghazals?lang=${language}`;
+	const url = `https://www.rekhta.org/poets/${poet}/ghazals?lang=${language}&sort=${sort}`;
 	const ghazals = await getGhazals(url, '.rt_bodyTitle', true);
 	return ghazals;
 };

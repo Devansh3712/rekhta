@@ -1,6 +1,7 @@
 import express from 'express';
 
 import languageMiddleware from './middlewares/language.js';
+import sortByMiddleware from './middlewares/sort.js';
 import ghazal from './routes/ghazal.js';
 import nazm from './routes/nazm.js';
 import shayari from './routes/shayari.js';
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(languageMiddleware);
+app.use(sortByMiddleware);
 
 app.use('/ghazal', ghazal);
 app.use('/nazm', nazm);

@@ -61,9 +61,9 @@ const getNazmsByTag = async (tag, language) => {
 	return nazms;
 };
 
-const getNazmsByPoet = async (poet, language) => {
+const getNazmsByPoet = async (poet, language, sort) => {
 	poet = poet.toLowerCase().replaceAll(' ', '-');
-	const url = `https://www.rekhta.org/poets/${poet}/nazms?lang=${language}`;
+	const url = `https://www.rekhta.org/poets/${poet}/nazms?lang=${language}&sort=${sort}`;
 	const nazms = await getNazms(url, '.rt_bodyTitle', true);
 	return nazms;
 };

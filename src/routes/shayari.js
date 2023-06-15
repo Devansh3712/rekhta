@@ -18,7 +18,13 @@ router.get('/tag/:tag', async (req, res) => {
 router.get('/poet/:poet', async (req, res) => {
 	const poet = req.params.poet;
 	const language = req.query?.lang || 'en';
-	const shayaris = await getShayarisByPoet(poet, language);
+	const sortBy = req.query?.sort || 'popularity';
+	const orderBy = req.query?.order || 'desc';
+	const shayaris = await getShayarisByPoet(
+		poet,
+		language,
+		sortBy + '-' + orderBy,
+	);
 	res.status(200).json(shayaris);
 });
 
