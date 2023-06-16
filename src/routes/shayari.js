@@ -11,7 +11,13 @@ const router = express.Router();
 router.get('/tag/:tag', async (req, res) => {
 	const tag = req.params.tag;
 	const language = req.query?.lang || 'en';
-	const shayaris = await getShayarisByTag(tag, language);
+	const sortBy = req.query?.sort || 'popularity';
+	const orderBy = req.query?.order || 'desc';
+	const shayaris = await getShayarisByTag(
+		tag,
+		language,
+		sortBy + '-' + orderBy,
+	);
 	res.status(200).json(shayaris);
 });
 

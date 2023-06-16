@@ -7,7 +7,9 @@ const router = express.Router();
 router.get('/tag/:tag', async (req, res) => {
 	const tag = req.params.tag;
 	const language = req.query?.lang || 'en';
-	const nazms = await getNazmsByTag(tag, language);
+	const sortBy = req.query?.sort || 'popularity';
+	const orderBy = req.query?.order || 'desc';
+	const nazms = await getNazmsByTag(tag, language, sortBy + '-' + orderBy);
 	res.status(200).json(nazms);
 });
 

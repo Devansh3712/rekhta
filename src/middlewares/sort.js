@@ -6,7 +6,7 @@ export default (req, res, next) => {
 	const sortBy = req.query?.sort;
 	const orderBy = req.query?.order;
 	if (sortBy) {
-		if (req.url.includes('/ghazal') && !ghazalSortParams.includes(sortBy))
+		if (req.url.startsWith('/ghazal') && !ghazalSortParams.includes(sortBy))
 			return res.status(400).json({
 				error:
 					"Query parameter 'sort' can only take values 'popularity', 'title' or 'radeef'",

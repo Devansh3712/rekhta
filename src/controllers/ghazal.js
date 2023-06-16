@@ -54,9 +54,9 @@ const getGhazals = async (rekhtaUrl, selector, isSinglePoet) => {
 	return ghazals;
 };
 
-const getGhazalsByTag = async (tag, language) => {
+const getGhazalsByTag = async (tag, language, sort) => {
 	tag = tag.toLowerCase().replaceAll(' ', '-');
-	const url = `https://www.rekhta.org/tags/${tag}-shayari/ghazals?lang=${language}`;
+	const url = `https://www.rekhta.org/tags/${tag}-shayari/ghazals?lang=${language}&sort=${sort}`;
 	const ghazals = await getGhazals(url, '.contentListBody', false);
 	return ghazals;
 };

@@ -54,9 +54,9 @@ const getNazms = async (rekhtaUrl, selector, isSinglePoet) => {
 	return nazms;
 };
 
-const getNazmsByTag = async (tag, language) => {
+const getNazmsByTag = async (tag, language, sort) => {
 	tag = tag.toLowerCase().replaceAll(' ', '-');
-	const url = `https://www.rekhta.org/tags/${tag}-shayari/nazms?lang=${language}`;
+	const url = `https://www.rekhta.org/tags/${tag}-shayari/nazms?lang=${language}&sort=${sort}`;
 	const nazms = await getNazms(url, '.contentListBody', false);
 	return nazms;
 };

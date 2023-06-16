@@ -34,9 +34,9 @@ const getShayaris = async (rekhtaUrl, isSinglePoet) => {
 	return shayaris;
 };
 
-const getShayarisByTag = async (tag, language) => {
+const getShayarisByTag = async (tag, language, sort) => {
 	tag = tag.toLowerCase().replaceAll(' ', '-');
-	const url = `https://www.rekhta.org/tags/${tag}-shayari?lang=${language}`;
+	const url = `https://www.rekhta.org/tags/${tag}-shayari?lang=${language}&sort=${sort}`;
 	const shayaris = await getShayaris(url, false);
 	return shayaris;
 };
