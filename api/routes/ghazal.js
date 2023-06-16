@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getNazmsByTag, getNazmsByPoet } from '../controllers/nazm.js';
+import { getGhazalsByTag, getGhazalsByPoet } from '../../src/ghazal.js';
 
 const router = express.Router();
 
@@ -10,13 +10,13 @@ router.get('/tag/:tag', async (req, res) => {
 	const count = req.query?.count || false;
 	const sortBy = req.query?.sort || 'popularity';
 	const orderBy = req.query?.order || 'desc';
-	const nazms = await getNazmsByTag(
+	const ghazals = await getGhazalsByTag(
 		tag,
 		language,
 		count,
 		sortBy + '-' + orderBy,
 	);
-	res.status(200).json(nazms);
+	res.status(200).json(ghazals);
 });
 
 router.get('/poet/:poet', async (req, res) => {
@@ -25,13 +25,13 @@ router.get('/poet/:poet', async (req, res) => {
 	const count = req.query?.count || false;
 	const sortBy = req.query?.sort || 'popularity';
 	const orderBy = req.query?.order || 'desc';
-	const nazms = await getNazmsByPoet(
+	const ghazals = await getGhazalsByPoet(
 		poet,
 		language,
 		count,
 		sortBy + '-' + orderBy,
 	);
-	res.status(200).json(nazms);
+	res.status(200).json(ghazals);
 });
 
 export default router;

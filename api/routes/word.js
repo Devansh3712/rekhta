@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getWordOfTheDay } from '../controllers/word.js';
+import { getWordOfTheDay } from '../../src/word.js';
 
 const router = express.Router();
 
