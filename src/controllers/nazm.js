@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 
-const getNazms = async (rekhtaUrl, selector, isSinglePoet) => {
+const getNazms = async (rekhtaUrl, selector, isSinglePoet, count) => {
 	const browser = await puppeteer.launch({
 		headless: 'new',
 	});
@@ -9,13 +9,19 @@ const getNazms = async (rekhtaUrl, selector, isSinglePoet) => {
 		waitUntil: 'networkidle2',
 	});
 	// Retrieve nazm links
-	const links = await page.evaluate((selector) => {
-		const nazms = document.querySelectorAll(selector);
-		return Array.from(nazms).map((nazm) => {
-			const link = nazm.querySelector('a:nth-child(2)').href;
-			return link;
-		});
-	}, selector);
+	const links = await page.evaluate(
+		(selector, count) => {
+			let nazms = Array.from(document.querySelectorAll(selector));
+			if (count) nazms = nazms.slice(0, count);
+			const result = nazms.map((nazm) => {
+				const link = nazm.querySelector('a:nth-child(2)').href;
+				return link;
+			});
+			return result;
+		},
+		selector,
+		count,
+	);
 	// Fetch nazm content
 	const nazms = [];
 	for (let i = 0; i < links.length; i++) {
@@ -24,7 +30,7 @@ const getNazms = async (rekhtaUrl, selector, isSinglePoet) => {
 			waitUntil: 'networkidle2',
 		});
 		page.setDefaultNavigationTimeout(0);
-		const content = await page.evaluate(
+		const result = await page.evaluate(
 			(url, isSinglePoet) => {
 				const nazm = document
 					.querySelector('.poemPageContentBody')
@@ -48,23 +54,23 @@ const getNazms = async (rekhtaUrl, selector, isSinglePoet) => {
 			link,
 			isSinglePoet,
 		);
-		nazms.push(content);
+		nazms.push(result);
 	}
 	await browser.close();
 	return nazms;
 };
 
-const getNazmsByTag = async (tag, language, sort) => {
+const getNazmsByTag = async (tag, language, count, sort) => {
 	tag = tag.toLowerCase().replaceAll(' ', '-');
 	const url = `https://www.rekhta.org/tags/${tag}-shayari/nazms?lang=${language}&sort=${sort}`;
-	const nazms = await getNazms(url, '.contentListBody', false);
+	const nazms = await getNazms(url, '.contentListBody', false, count);
 	return nazms;
 };
 
-const getNazmsByPoet = async (poet, language, sort) => {
+const getNazmsByPoet = async (poet, language, count, sort) => {
 	poet = poet.toLowerCase().replaceAll(' ', '-');
 	const url = `https://www.rekhta.org/poets/${poet}/nazms?lang=${language}&sort=${sort}`;
-	const nazms = await getNazms(url, '.rt_bodyTitle', true);
+	const nazms = await getNazms(url, '.rt_bodyTitle', true, count);
 	return nazms;
 };
 

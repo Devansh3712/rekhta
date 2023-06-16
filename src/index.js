@@ -1,7 +1,9 @@
 import express from 'express';
 
+import countMiddleware from './middlewares/count.js';
 import languageMiddleware from './middlewares/language.js';
 import sortByMiddleware from './middlewares/sort.js';
+
 import ghazal from './routes/ghazal.js';
 import nazm from './routes/nazm.js';
 import shayari from './routes/shayari.js';
@@ -13,6 +15,7 @@ const port = process.env.PORT || 8000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(countMiddleware);
 app.use(languageMiddleware);
 app.use(sortByMiddleware);
 
