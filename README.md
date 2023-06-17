@@ -1,4 +1,4 @@
-# Unofficial Rekhta API
+## Unofficial Rekhta API
 
 This is an unofficial API for [Rekhta](https://www.rekhta.org/?lang=en), made using JavaScript. It scrapes the website using `puppeteer` and serves the data using `express`.
 

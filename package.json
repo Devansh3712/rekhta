@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node api/index.js",
-    "dev": "nodemon api/index.js"
+    "dev": "nodemon api/index.js",
+    "docs": "jsdoc -c ./jsdoc-config.json"
   },
   "keywords": [],
   "author": "Devansh Singh <devanshamity@gmail.com>",

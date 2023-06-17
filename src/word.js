@@ -1,5 +1,12 @@
+/** @module word */
 import puppeteer from 'puppeteer';
 
+/**
+ * Fetch the word of the day for a given date.
+ * @async
+ * @param {string} date - Date in YYYY-MM-DD format
+ * @returns {Promise.<Array.<{ english: String, hindi: String, urdu: String, meaning: String, usage: String }>>}
+ */
 const getWordOfTheDay = async (date) => {
 	const rekhtaUrl = `https://www.rekhta.org/archives/${date}/WordOfTheDays/`;
 	const browser = await puppeteer.launch({
