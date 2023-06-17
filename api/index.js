@@ -8,6 +8,7 @@ import sortByMiddleware from './middlewares/sort.js';
 import ghazal from './routes/ghazal.js';
 import nazm from './routes/nazm.js';
 import shayari from './routes/shayari.js';
+import top20 from './routes/top20.js';
 import word from './routes/word.js';
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(sortByMiddleware);
 app.use('/ghazal', ghazal);
 app.use('/nazm', nazm);
 app.use('/shayari', shayari);
+app.use('/top20', top20);
 app.use('/word-of-the-day', word);
 app.use((req, res) => {
 	res.status(404).json({ error: 'Endpoint not found' });

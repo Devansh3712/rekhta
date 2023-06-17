@@ -3,7 +3,6 @@ import express from 'express';
 import {
 	getShayarisByTag,
 	getShayarisByPoet,
-	getTop20ShayarisByPoet,
 	getTodaysTop5Shayari,
 } from '../../src/shayari.js';
 
@@ -43,13 +42,6 @@ router.get('/poet/:poet', async (req, res) => {
 		count,
 		sortBy + '-' + orderBy,
 	);
-	res.status(200).json(shayaris);
-});
-
-router.get('/poet/:poet/top20', async (req, res) => {
-	const poet = req.params.poet;
-	const language = req.query?.lang || 'en';
-	const shayaris = await getTop20ShayarisByPoet(poet, language);
 	res.status(200).json(shayaris);
 });
 

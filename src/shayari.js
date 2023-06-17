@@ -1,6 +1,9 @@
 /** @module shayari */
 import puppeteer from 'puppeteer';
 
+import { languages, shayariTags, coupletTags } from './constants.js';
+import { InvalidLanguageError, InvalidTagError } from './errors.js';
+
 /**
  * Fetch shayaris from a Rekhta URL using a specificed selector.
  * @async
@@ -87,6 +90,40 @@ const getShayarisByPoet = async (poet, language, count, sort) => {
 };
 
 /**
+ * Fetch top 20 shayaris by a specific tag.
+ * @async
+ * @param {String} tag - Tag to get shayaris of
+ * @param {String} language - Language to get results in
+ * @throws {InvalidTagError}
+ * @throws {InvalidLanguageError}
+ * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
+ */
+const getTop20ShayarisByTag = async (tag, language) => {
+	if (!shayariTags.includes(tag)) throw InvalidTagError;
+	if (!languages.includes(language)) throw InvalidLanguageError;
+	const url = `https://www.rekhta.org/top-20/${tag}-shayari`;
+	const shayaris = await getShayaris(url, '.sherSection', false);
+	return shayaris;
+};
+
+/**
+ * Fetch top 20 couplets by a specific tag.
+ * @async
+ * @param {String} tag - Tag to get couplets of
+ * @param {String} language - Language to get results in
+ * @throws {InvalidTagError}
+ * @throws {InvalidLanguageError}
+ * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
+ */
+const getTop20CoupletsByTag = async (tag, language) => {
+	if (!coupletTags.includes(tag)) throw InvalidTagError;
+	if (!languages.includes(language)) throw InvalidLanguageError;
+	const url = `https://www.rekhta.org/top-20/${tag}`;
+	const shayaris = await getShayaris(url, '.sherSection', false);
+	return shayaris;
+};
+
+/**
  * Fetch top 20 shayaris by a specific poet.
  * @async
  * @param {String} poet - Poet to get shayaris of
@@ -116,6 +153,8 @@ const getTodaysTop5Shayari = async (date, language) => {
 export {
 	getShayarisByTag,
 	getShayarisByPoet,
+	getTop20ShayarisByTag,
+	getTop20CoupletsByTag,
 	getTop20ShayarisByPoet,
 	getTodaysTop5Shayari,
 };
