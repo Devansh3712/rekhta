@@ -25,8 +25,9 @@ router.get('/tag/:tag', async (req, res) => {
 });
 
 router.get('/top5', async (req, res) => {
+	const date = req.query?.date || new Date().toISOString().split('T')[0];
 	const language = req.query?.lang || 'en';
-	const shayaris = await getTodaysTop5Shayari(language);
+	const shayaris = await getTodaysTop5Shayari(date, language);
 	res.status(200).json(shayaris);
 });
 

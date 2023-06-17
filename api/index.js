@@ -1,6 +1,7 @@
 import express from 'express';
 
 import countMiddleware from './middlewares/count.js';
+import dateMiddleware from './middlewares/date.js';
 import languageMiddleware from './middlewares/language.js';
 import sortByMiddleware from './middlewares/sort.js';
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(countMiddleware);
+app.use(dateMiddleware);
 app.use(languageMiddleware);
 app.use(sortByMiddleware);
 
