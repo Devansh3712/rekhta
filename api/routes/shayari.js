@@ -4,6 +4,7 @@ import {
 	getShayarisByTag,
 	getShayarisByPoet,
 	getTop20ShayarisByPoet,
+	getTodaysTop5Shayari,
 } from '../../src/shayari.js';
 
 const router = express.Router();
@@ -20,6 +21,12 @@ router.get('/tag/:tag', async (req, res) => {
 		count,
 		sortBy + '-' + orderBy,
 	);
+	res.status(200).json(shayaris);
+});
+
+router.get('/top5', async (req, res) => {
+	const language = req.query?.lang || 'en';
+	const shayaris = await getTodaysTop5Shayari(language);
 	res.status(200).json(shayaris);
 });
 
