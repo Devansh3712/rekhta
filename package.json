@@ -10,6 +10,10 @@
     "docs": "jsdoc -c ./jsdoc-config.json"
   },
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Devansh3712/rekhta.git"
+  },
   "author": "Devansh Singh <devanshamity@gmail.com>",
   "license": "MIT",
   "dependencies": {
