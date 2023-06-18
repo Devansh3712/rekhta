@@ -21,7 +21,7 @@ import {
  * @param	{String} selector - HTML selector to fetch data
  * @param	{Boolean} isSinglePoet - Ghazals of a single poet or not
  * @param	{Number} count - Count of ghazals to return
- * @returns {Promise.<Array.<{ ghazal: String, poet: String, url: String }>> | Promise.<Array.<{ ghazal: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ ghazal: String, poet: String, url: String }>> | Promise.<Array.<{ ghazal: String, url: String }>>}
  */
 const getGhazals = async (rekhtaUrl, selector, isSinglePoet, count) => {
 	const browser = await puppeteer.launch({
@@ -96,7 +96,7 @@ const getGhazals = async (rekhtaUrl, selector, isSinglePoet, count) => {
  * @throws	{InvalidLanguageError}
  * @throws	{InvalidGhazalSortParamError}
  * @throws	{InvalidOrderParamError}
- * @returns {Promise.<Array.<{ ghazal: String, poet: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ ghazal: String, poet: String, url: String }>>}
  */
 const getGhazalsByTag = async (
 	tag,
@@ -126,7 +126,7 @@ const getGhazalsByTag = async (
  * @throws	{InvalidLanguageError}
  * @throws	{InvalidGhazalSortParamError}
  * @throws	{InvalidOrderParamError}
- * @returns {Promise.<Array.<{ nazm: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ nazm: String, url: String }>>}
  */
 const getGhazalsByPoet = async (
 	poet,

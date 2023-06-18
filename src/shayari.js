@@ -24,7 +24,7 @@ import {
  * @param	{String} selector - HTML selector to fetch data
  * @param	{Boolean} isSinglePoet - Shayaris of a single poet or not
  * @param	{Number} count - Count of shayaris to return
- * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>> | Promise.<Array.<{ shayari: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ shayari: String, poet: String, url: String }>> | Promise.<Array.<{ shayari: String, url: String }>>}
  */
 const getShayaris = async (rekhtaUrl, selector, isSinglePoet, count) => {
 	const browser = await puppeteer.launch({
@@ -82,7 +82,7 @@ const getShayaris = async (rekhtaUrl, selector, isSinglePoet, count) => {
  * @throws	{InvalidLanguageError}
  * @throws	{InvalidSortParamError}
  * @throws	{InvalidOrderParamError}
- * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
  */
 const getShayarisByTag = async (
 	tag,
@@ -138,13 +138,13 @@ const getShayarisByPoet = async (
  * @param	{String} language - Language to get results in
  * @throws	{InvalidTagError}
  * @throws	{InvalidLanguageError}
- * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
  */
 const getTop20ShayarisByTag = async (tag, language = 'en') => {
 	if (!shayariTags.includes(tag)) throw InvalidTagError;
 	if (!languages.includes(language)) throw InvalidLanguageError;
 	const url = `${rekhta}/top-20/${tag}-shayari`;
-	const shayaris = await getShayaris(url, '.sherSection', false, 0);
+	const shayaris = await getShayaris(url, '.sherSection', false, false);
 	return shayaris;
 };
 
@@ -156,13 +156,13 @@ const getTop20ShayarisByTag = async (tag, language = 'en') => {
  * @param	{String} language - Language to get results in
  * @throws	{InvalidTagError}
  * @throws	{InvalidLanguageError}
- * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
  */
 const getTop20CoupletsByTag = async (tag, language = 'en') => {
 	if (!coupletTags.includes(tag)) throw InvalidTagError;
 	if (!languages.includes(language)) throw InvalidLanguageError;
 	const url = `${rekhta}/top-20/${tag}`;
-	const shayaris = await getShayaris(url, '.sherSection', false, 0);
+	const shayaris = await getShayaris(url, '.sherSection', false, false);
 	return shayaris;
 };
 
@@ -173,13 +173,13 @@ const getTop20CoupletsByTag = async (tag, language = 'en') => {
  * @param	{String} poet - Poet to get shayaris of
  * @param	{String} language - Language to get results in
  * @throws	{InvalidLanguageError}
- * @returns {Promise.<Array.<{ shayari: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ shayari: String, url: String }>>}
  */
 const getTop20ShayarisByPoet = async (poet, language = 'en') => {
 	if (!languages.includes(language)) throw InvalidLanguageError;
 	poet = poet.toLowerCase().replaceAll(' ', '-');
 	const url = `${rekhta}/poets/${poet}/t20?lang=${language}`;
-	const shayaris = await getShayaris(url, '.sherSection', true, 0);
+	const shayaris = await getShayaris(url, '.sherSection', true, false);
 	return shayaris;
 };
 
@@ -190,12 +190,12 @@ const getTop20ShayarisByPoet = async (poet, language = 'en') => {
  * @param	{String} date - Date in YYYY-MM-DD format
  * @param	{String} language - Language to get results in
  * @throws	{InvalidLanguageError}
- * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
  */
 const getTop5ShayarisByDay = async (date, language = 'en') => {
 	if (!languages.includes(language)) throw InvalidLanguageError;
 	const url = `${rekhta}/archives/${date}/TopFive?lag=${language}`;
-	const shayaris = await getShayaris(url, '.owl-item', false, 0);
+	const shayaris = await getShayaris(url, '.owl-item', false, false);
 	return shayaris;
 };
 

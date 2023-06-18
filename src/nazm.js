@@ -16,7 +16,7 @@ import {
  * @param	{String} selector - HTML selector to fetch data
  * @param	{Boolean} isSinglePoet - Nazms of a single poet or not
  * @param	{Number} count - Count of nazms to return
- * @returns {Promise.<Array.<{ nazm: String, poet: String, url: String }>> | Promise.<Array.<{ nazm: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ nazm: String, poet: String, url: String }>> | Promise.<Array.<{ nazm: String, url: String }>>}
  */
 const getNazms = async (rekhtaUrl, selector, isSinglePoet, count) => {
 	const browser = await puppeteer.launch({
@@ -91,7 +91,7 @@ const getNazms = async (rekhtaUrl, selector, isSinglePoet, count) => {
  * @throws	{InvalidLanguageError}
  * @throws	{InvalidSortParamError}
  * @throws	{InvalidOrderParamError}
- * @returns {Promise.<Array.<{ nazm: String, poet: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ nazm: String, poet: String, url: String }>>}
  */
 const getNazmsByTag = async (
 	tag,
@@ -121,7 +121,7 @@ const getNazmsByTag = async (
  * @throws	{InvalidLanguageError}
  * @throws	{InvalidSortParamError}
  * @throws	{InvalidOrderParamError}
- * @returns {Promise.<Array.<{ nazm: String, url: String }>>}
+ * @returns	{Promise.<Array.<{ nazm: String, url: String }>>}
  */
 const getNazmsByPoet = async (
 	poet,
