@@ -1,17 +1,30 @@
 /** @module shayari */
 import puppeteer from 'puppeteer';
 
-import { languages, shayariTags, coupletTags } from './constants.js';
-import { InvalidLanguageError, InvalidTagError } from './errors.js';
+import {
+	rekhta,
+	languages,
+	shayariTags,
+	coupletTags,
+	sortParams,
+	orderParams,
+} from './constants.js';
+import {
+	InvalidLanguageError,
+	InvalidOrderParamError,
+	InvalidSortParamError,
+	InvalidTagError,
+} from './errors.js';
 
 /**
  * Fetch shayaris from a Rekhta URL using a specificed selector.
+ *
  * @async
- * @param {String} rekhtaUrl - URL to scrape
- * @param {String} selector - HTML selector to fetch data
- * @param {Boolean} isSinglePoet - Shayaris of a single poet or not
- * @param {Number | Boolean} count - Count of shayaris to return
- * @returns {Promise.<Array.<{ shayari: String, poet: String | undefined, url: String }>>}
+ * @param	{String} rekhtaUrl - URL to scrape
+ * @param	{String} selector - HTML selector to fetch data
+ * @param	{Boolean} isSinglePoet - Shayaris of a single poet or not
+ * @param	{Number} count - Count of shayaris to return
+ * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>> | Promise.<Array.<{ shayari: String, url: String }>>}
  */
 const getShayaris = async (rekhtaUrl, selector, isSinglePoet, count) => {
 	const browser = await puppeteer.launch({
@@ -24,7 +37,7 @@ const getShayaris = async (rekhtaUrl, selector, isSinglePoet, count) => {
 	const shayaris = await page.evaluate(
 		(selector, isSinglePoet, count) => {
 			let shayariList = Array.from(document.querySelectorAll(selector));
-			if (count) shayariList = shayariList.slice(0, count);
+			if (count > 0) shayariList = shayariList.slice(0, count);
 			const result = shayariList.map((quote) => {
 				const shayari = quote
 					.querySelector('.c')
@@ -59,94 +72,130 @@ const getShayaris = async (rekhtaUrl, selector, isSinglePoet, count) => {
 
 /**
  * Fetch shayaris by a specific tag.
+ *
  * @async
- * @param {String} tag - Tag to get shayaris of
- * @param {String} language - Language to get results in
- * @param {Number | Boolean} count - Count of shayaris to return
- * @param {String} sort - Result sorting parameters
+ * @param	{String} tag - Tag to get shayaris of
+ * @param	{String} language - Language to get results in
+ * @param	{Number} count - Count of shayaris to return
+ * @param	{String} sort - Result sorting parameters
+ * @param	{String} order - Order of sorting
+ * @throws	{InvalidLanguageError}
+ * @throws	{InvalidSortParamError}
+ * @throws	{InvalidOrderParamError}
  * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
  */
-const getShayarisByTag = async (tag, language, count, sort) => {
+const getShayarisByTag = async (
+	tag,
+	language = 'en',
+	count = false,
+	sort = 'popularity',
+	order = 'desc',
+) => {
+	if (!languages.includes(language)) throw InvalidLanguageError;
+	if (!sortParams.includes(sort)) throw InvalidSortParamError;
+	if (!orderParams.includes(order)) throw InvalidOrderParamError;
 	tag = tag.toLowerCase().replaceAll(' ', '-');
-	const url = `https://www.rekhta.org/tags/${tag}-shayari?lang=${language}&sort=${sort}`;
+	const url = `${rekhta}/tags/${tag}-shayari?lang=${language}&sort=${sort}-${order}`;
 	const shayaris = await getShayaris(url, '.sherSection', false, count);
 	return shayaris;
 };
 
 /**
  * Fetch shayaris by a specific poet.
+ *
  * @async
- * @param {String} poet - Poet to get shayaris of
- * @param {String} language - Language to get results in
- * @param {Number | Boolean} count - Count of shayaris to return
- * @param {String} sort - Result sorting parameters
- * @returns {Promise.<Array.<{ shayari: String, url: String }>>}
+ * @param	{String} poet - Poet to get shayaris of
+ * @param	{String} language - Language to get results in
+ * @param	{Number} count - Count of shayaris to return
+ * @param	{String} sort - Result sorting parameters
+ * @param	{String} order - Order of sorting
+ * @throws	{InvalidLanguageError}
+ * @throws	{InvalidSortParamError}
+ * @throws	{InvalidOrderParamError}
+ * @returns	{Promise.<Array.<{ shayari: String, url: String }>>}
  */
-const getShayarisByPoet = async (poet, language, count, sort) => {
+const getShayarisByPoet = async (
+	poet,
+	language = 'en',
+	count = false,
+	sort = 'popularity',
+	order = 'desc',
+) => {
+	if (!languages.includes(language)) throw InvalidLanguageError;
+	if (!sortParams.includes(sort)) throw InvalidSortParamError;
+	if (!orderParams.includes(order)) throw InvalidOrderParamError;
 	poet = poet.toLowerCase().replaceAll(' ', '-');
-	const url = `https://www.rekhta.org/poets/${poet}/couplets?lang=${language}&sort=${sort}`;
+	const url = `${rekhta}/poets/${poet}/couplets?lang=${language}&sort=${sort}-${order}`;
 	const shayaris = await getShayaris(url, '.sherSection', true, count);
 	return shayaris;
 };
 
 /**
  * Fetch top 20 shayaris by a specific tag.
+ *
  * @async
- * @param {String} tag - Tag to get shayaris of
- * @param {String} language - Language to get results in
- * @throws {InvalidTagError}
- * @throws {InvalidLanguageError}
+ * @param	{String} tag - Tag to get shayaris of
+ * @param	{String} language - Language to get results in
+ * @throws	{InvalidTagError}
+ * @throws	{InvalidLanguageError}
  * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
  */
-const getTop20ShayarisByTag = async (tag, language) => {
+const getTop20ShayarisByTag = async (tag, language = 'en') => {
 	if (!shayariTags.includes(tag)) throw InvalidTagError;
 	if (!languages.includes(language)) throw InvalidLanguageError;
-	const url = `https://www.rekhta.org/top-20/${tag}-shayari`;
-	const shayaris = await getShayaris(url, '.sherSection', false);
+	const url = `${rekhta}/top-20/${tag}-shayari`;
+	const shayaris = await getShayaris(url, '.sherSection', false, 0);
 	return shayaris;
 };
 
 /**
  * Fetch top 20 couplets by a specific tag.
+ *
  * @async
- * @param {String} tag - Tag to get couplets of
- * @param {String} language - Language to get results in
- * @throws {InvalidTagError}
- * @throws {InvalidLanguageError}
+ * @param	{String} tag - Tag to get couplets of
+ * @param	{String} language - Language to get results in
+ * @throws	{InvalidTagError}
+ * @throws	{InvalidLanguageError}
  * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
  */
-const getTop20CoupletsByTag = async (tag, language) => {
+const getTop20CoupletsByTag = async (tag, language = 'en') => {
 	if (!coupletTags.includes(tag)) throw InvalidTagError;
 	if (!languages.includes(language)) throw InvalidLanguageError;
-	const url = `https://www.rekhta.org/top-20/${tag}`;
-	const shayaris = await getShayaris(url, '.sherSection', false);
+	const url = `${rekhta}/top-20/${tag}`;
+	const shayaris = await getShayaris(url, '.sherSection', false, 0);
 	return shayaris;
 };
 
 /**
  * Fetch top 20 shayaris by a specific poet.
+ *
  * @async
- * @param {String} poet - Poet to get shayaris of
- * @param {String} language - Language to get results in
+ * @param	{String} poet - Poet to get shayaris of
+ * @param	{String} language - Language to get results in
+ * @throws	{InvalidLanguageError}
  * @returns {Promise.<Array.<{ shayari: String, url: String }>>}
  */
-const getTop20ShayarisByPoet = async (poet, language) => {
+const getTop20ShayarisByPoet = async (poet, language = 'en') => {
+	if (!languages.includes(language)) throw InvalidLanguageError;
 	poet = poet.toLowerCase().replaceAll(' ', '-');
-	const url = `https://www.rekhta.org/poets/${poet}/t20?lang=${language}`;
-	const shayaris = await getShayaris(url, '.sherSection', true);
+	const url = `${rekhta}/poets/${poet}/t20?lang=${language}`;
+	const shayaris = await getShayaris(url, '.sherSection', true, 0);
 	return shayaris;
 };
 
 /**
  * Get top 5 shayaris of the day for a given date.
+ *
  * @async
- * @param {String} date - Date in YYYY-MM-DD format
- * @param {String} language - Language to get results in
+ * @param	{String} date - Date in YYYY-MM-DD format
+ * @param	{String} language - Language to get results in
+ * @throws	{InvalidLanguageError}
  * @returns {Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
  */
-const getTodaysTop5Shayari = async (date, language) => {
-	const url = `https://www.rekhta.org/archives/${date}/TopFive?lag=${language}`;
-	const shayaris = await getShayaris(url, '.owl-item', false);
+const getTop5ShayarisByDay = async (date, language = 'en') => {
+	if (!languages.includes(language)) throw InvalidLanguageError;
+	const url = `${rekhta}/archives/${date}/TopFive?lag=${language}`;
+	const shayaris = await getShayaris(url, '.owl-item', false, 0);
 	return shayaris;
 };
 
@@ -156,5 +205,5 @@ export {
 	getTop20ShayarisByTag,
 	getTop20CoupletsByTag,
 	getTop20ShayarisByPoet,
-	getTodaysTop5Shayari,
+	getTop5ShayarisByDay,
 };

@@ -106,7 +106,7 @@
     
 
     
-    <h4 class="name" id="~getNazms"><span class="type-signature">(async, inner) </span>getNazms<span class="signature">(rekhtaUrl, selector, isSinglePoet, count)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{nazm: String, poet: (String|undefined), url: String}>>}</span></h4>
+    <h4 class="name" id="~getNazms"><span class="type-signature">(async, inner) </span>getNazms<span class="signature">(rekhtaUrl, selector, isSinglePoet, count)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{nazm: String, poet: String, url: String}>>|Promise.&lt;Array.&lt;{nazm: String, url: String}>>}</span></h4>
     
 
     
@@ -226,9 +226,6 @@
             
                 
 <span class="param-type">Number</span>
-|
-
-<span class="param-type">Boolean</span>
 
 
             
@@ -279,7 +276,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="nazm.js.html">nazm.js</a>, <a href="nazm.js.html#line13">line 13</a>
+        <a href="nazm.js.html">nazm.js</a>, <a href="nazm.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -315,7 +312,10 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;Array.&lt;{nazm: String, poet: (String|undefined), url: String}>></span>
+<span class="param-type">Promise.&lt;Array.&lt;{nazm: String, poet: String, url: String}>></span>
+|
+
+<span class="param-type">Promise.&lt;Array.&lt;{nazm: String, url: String}>></span>
 
 
     </dd>
@@ -333,7 +333,7 @@
     
 
     
-    <h4 class="name" id="~getNazmsByPoet"><span class="type-signature">(async, inner) </span>getNazmsByPoet<span class="signature">(poet, language, count, sort)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{nazm: String, url: String}>>}</span></h4>
+    <h4 class="name" id="~getNazmsByPoet"><span class="type-signature">(async, inner) </span>getNazmsByPoet<span class="signature">(poet, language, count, sort, order)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{nazm: String, url: String}>>}</span></h4>
     
 
     
@@ -367,6 +367,8 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -392,6 +394,10 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>Poet to get nazms of</p></td>
         </tr>
@@ -415,6 +421,12 @@
             
 
             
+                <td class="default">
+                
+                    en
+                
+                </td>
+            
 
             <td class="description last"><p>Language to get results in</p></td>
         </tr>
@@ -430,9 +442,6 @@
             
                 
 <span class="param-type">Number</span>
-|
-
-<span class="param-type">Boolean</span>
 
 
             
@@ -440,6 +449,12 @@
 
             
 
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
             
 
             <td class="description last"><p>Count of nazms to return</p></td>
@@ -464,8 +479,43 @@
             
 
             
+                <td class="default">
+                
+                    popularity
+                
+                </td>
+            
 
             <td class="description last"><p>Result sorting parameters</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>order</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    desc
+                
+                </td>
+            
+
+            <td class="description last"><p>Order of sorting</p></td>
         </tr>
 
     
@@ -506,7 +556,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="nazm.js.html">nazm.js</a>, <a href="nazm.js.html#line99">line 99</a>
+        <a href="nazm.js.html">nazm.js</a>, <a href="nazm.js.html#line126">line 126</a>
     </li></ul></dd>
     
 
@@ -529,6 +579,47 @@
 
 
 
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidLanguageError</span>
+
+
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidSortParamError</span>
+
+
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidOrderParamError</span>
+
+
+    
+    </div>
+
+</li>
+    </ul>
 
 
 <h5>Returns:</h5>
@@ -560,7 +651,7 @@
     
 
     
-    <h4 class="name" id="~getNazmsByTag"><span class="type-signature">(async, inner) </span>getNazmsByTag<span class="signature">(tag, language, count, sort)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{nazm: String, poet: String, url: String}>>}</span></h4>
+    <h4 class="name" id="~getNazmsByTag"><span class="type-signature">(async, inner) </span>getNazmsByTag<span class="signature">(tag, language, count, sort, order)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{nazm: String, poet: String, url: String}>>}</span></h4>
     
 
     
@@ -594,6 +685,8 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -619,6 +712,10 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>Tag to get nazms of</p></td>
         </tr>
@@ -642,6 +739,12 @@
             
 
             
+                <td class="default">
+                
+                    en
+                
+                </td>
+            
 
             <td class="description last"><p>Language to get results in</p></td>
         </tr>
@@ -657,9 +760,6 @@
             
                 
 <span class="param-type">Number</span>
-|
-
-<span class="param-type">Boolean</span>
 
 
             
@@ -667,6 +767,12 @@
 
             
 
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
             
 
             <td class="description last"><p>Count of nazms to return</p></td>
@@ -691,8 +797,43 @@
             
 
             
+                <td class="default">
+                
+                    popularity
+                
+                </td>
+            
 
             <td class="description last"><p>Result sorting parameters</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>order</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    desc
+                
+                </td>
+            
+
+            <td class="description last"><p>Order of sorting</p></td>
         </tr>
 
     
@@ -733,7 +874,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="nazm.js.html">nazm.js</a>, <a href="nazm.js.html#line83">line 83</a>
+        <a href="nazm.js.html">nazm.js</a>, <a href="nazm.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -756,6 +897,47 @@
 
 
 
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidLanguageError</span>
+
+
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidSortParamError</span>
+
+
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidOrderParamError</span>
+
+
+    
+    </div>
+
+</li>
+    </ul>
 
 
 <h5>Returns:</h5>
@@ -803,7 +985,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Jun 18 2023 00:45:58 GMT+0530 (India Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Jun 18 2023 10:13:34 GMT+0530 (India Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

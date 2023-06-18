@@ -1,14 +1,27 @@
 /** @module ghazal */
 import puppeteer from 'puppeteer';
 
+import {
+	rekhta,
+	languages,
+	ghazalSortParams,
+	orderParams,
+} from './constants.js';
+import {
+	InvalidLanguageError,
+	InvalidGhazalSortParamError,
+	InvalidOrderParamError,
+} from './errors.js';
+
 /**
  * Fetch ghazals from a Rekhta URL using a specified selector.
+ *
  * @async
- * @param {String} rekhtaUrl - URL to scrape
- * @param {String} selector - HTML selector to fetch data
- * @param {Boolean} isSinglePoet - Ghazals of a single poet or not
- * @param {Number | Boolean} count - Count of ghazals to return
- * @returns {Promise.<Array.<{ ghazal: String, poet: String | undefined, url: String }>>}
+ * @param	{String} rekhtaUrl - URL to scrape
+ * @param	{String} selector - HTML selector to fetch data
+ * @param	{Boolean} isSinglePoet - Ghazals of a single poet or not
+ * @param	{Number} count - Count of ghazals to return
+ * @returns {Promise.<Array.<{ ghazal: String, poet: String, url: String }>> | Promise.<Array.<{ ghazal: String, url: String }>>}
  */
 const getGhazals = async (rekhtaUrl, selector, isSinglePoet, count) => {
 	const browser = await puppeteer.launch({
@@ -73,32 +86,60 @@ const getGhazals = async (rekhtaUrl, selector, isSinglePoet, count) => {
 
 /**
  * Fetch ghazals by a specific tag.
+ *
  * @async
- * @param {String} tag - Tag to get ghazals of
- * @param {String} language - Language to get results in
- * @param {Number | Boolean} count - Count of ghazals to return
- * @param {String} sort - Result sorting parameters
+ * @param	{String} tag - Tag to get ghazals of
+ * @param	{String} language - Language to get results in
+ * @param	{Number} count - Count of ghazals to return
+ * @param	{String} sort - Result sorting parameters
+ * @param	{String} order - Order of sorting
+ * @throws	{InvalidLanguageError}
+ * @throws	{InvalidGhazalSortParamError}
+ * @throws	{InvalidOrderParamError}
  * @returns {Promise.<Array.<{ ghazal: String, poet: String, url: String }>>}
  */
-const getGhazalsByTag = async (tag, language, count, sort) => {
+const getGhazalsByTag = async (
+	tag,
+	language = 'en',
+	count = false,
+	sort = 'popularity',
+	order = 'desc',
+) => {
+	if (!languages.includes(language)) throw InvalidLanguageError;
+	if (!ghazalSortParams.includes(sort)) throw InvalidGhazalSortParamError;
+	if (!orderParams.includes(order)) throw InvalidOrderParamError;
 	tag = tag.toLowerCase().replaceAll(' ', '-');
-	const url = `https://www.rekhta.org/tags/${tag}-shayari/ghazals?lang=${language}&sort=${sort}`;
+	const url = `${rekhta}/tags/${tag}-shayari/ghazals?lang=${language}&sort=${sort}-${order}`;
 	const ghazals = await getGhazals(url, '.contentListBody', false, count);
 	return ghazals;
 };
 
 /**
  * Fetch ghazals by a specific poet.
+ *
  * @async
- * @param {String} poet - Poet to get ghazals of
- * @param {String} language - Language to get results in
- * @param {Number | Boolean} count - Count of ghazals to return
- * @param {String} sort - Result sorting parameters
+ * @param	{String} poet - Poet to get ghazals of
+ * @param	{String} language - Language to get results in
+ * @param	{Number} count - Count of ghazals to return
+ * @param	{String} sort - Result sorting parameters
+ * @param	{String} order - Order of sorting
+ * @throws	{InvalidLanguageError}
+ * @throws	{InvalidGhazalSortParamError}
+ * @throws	{InvalidOrderParamError}
  * @returns {Promise.<Array.<{ nazm: String, url: String }>>}
  */
-const getGhazalsByPoet = async (poet, language, count, sort) => {
+const getGhazalsByPoet = async (
+	poet,
+	language = 'en',
+	count = false,
+	sort = 'popularity',
+	order = 'desc',
+) => {
+	if (!languages.includes(language)) throw InvalidLanguageError;
+	if (!ghazalSortParams.includes(sort)) throw InvalidGhazalSortParamError;
+	if (!orderParams.includes(order)) throw InvalidOrderParamError;
 	poet = poet.toLowerCase().replaceAll(' ', '-');
-	const url = `https://www.rekhta.org/poets/${poet}/ghazals?lang=${language}&sort=${sort}`;
+	const url = `${rekhta}/poets/${poet}/ghazals?lang=${language}&sort=${sort}-${order}`;
 	const ghazals = await getGhazals(url, '.rt_bodyTitle', true, count);
 	return ghazals;
 };

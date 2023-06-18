@@ -106,7 +106,7 @@
     
 
     
-    <h4 class="name" id="~getShayaris"><span class="type-signature">(async, inner) </span>getShayaris<span class="signature">(rekhtaUrl, selector, isSinglePoet, count)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{shayari: String, poet: (String|undefined), url: String}>>}</span></h4>
+    <h4 class="name" id="~getShayaris"><span class="type-signature">(async, inner) </span>getShayaris<span class="signature">(rekhtaUrl, selector, isSinglePoet, count)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{shayari: String, poet: String, url: String}>>|Promise.&lt;Array.&lt;{shayari: String, url: String}>>}</span></h4>
     
 
     
@@ -226,9 +226,6 @@
             
                 
 <span class="param-type">Number</span>
-|
-
-<span class="param-type">Boolean</span>
 
 
             
@@ -279,461 +276,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line16">line 16</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;Array.&lt;{shayari: String, poet: (String|undefined), url: String}>></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~getShayarisByPoet"><span class="type-signature">(async, inner) </span>getShayarisByPoet<span class="signature">(poet, language, count, sort)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{shayari: String, url: String}>>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Fetch shayaris by a specific poet.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>poet</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Poet to get shayaris of</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>language</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Language to get results in</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>count</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-|
-
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Count of shayaris to return</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>sort</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Result sorting parameters</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line85">line 85</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;Array.&lt;{shayari: String, url: String}>></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~getShayarisByTag"><span class="type-signature">(async, inner) </span>getShayarisByTag<span class="signature">(tag, language, count, sort)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{shayari: String, poet: String, url: String}>>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Fetch shayaris by a specific tag.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>tag</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Tag to get shayaris of</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>language</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Language to get results in</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>count</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-|
-
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Count of shayaris to return</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>sort</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Result sorting parameters</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line69">line 69</a>
+        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -770,6 +313,9 @@
     <dd>
         
 <span class="param-type">Promise.&lt;Array.&lt;{shayari: String, poet: String, url: String}>></span>
+|
+
+<span class="param-type">Promise.&lt;Array.&lt;{shayari: String, url: String}>></span>
 
 
     </dd>
@@ -787,7 +333,7 @@
     
 
     
-    <h4 class="name" id="~getTodaysTop5Shayari"><span class="type-signature">(async, inner) </span>getTodaysTop5Shayari<span class="signature">(date, language)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{shayari: String, poet: String, url: String}>>}</span></h4>
+    <h4 class="name" id="~getShayarisByPoet"><span class="type-signature">(async, inner) </span>getShayarisByPoet<span class="signature">(poet, language, count, sort, order)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{shayari: String, url: String}>>}</span></h4>
     
 
     
@@ -795,7 +341,7 @@
 
 
 <div class="description">
-    <p>Get top 5 shayaris of the day for a given date.</p>
+    <p>Fetch shayaris by a specific poet.</p>
 </div>
 
 
@@ -821,6 +367,8 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -831,7 +379,7 @@
 
         <tr>
             
-                <td class="name"><code>date</code></td>
+                <td class="name"><code>poet</code></td>
             
 
             <td class="type">
@@ -846,8 +394,12 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
-            <td class="description last"><p>Date in YYYY-MM-DD format</p></td>
+            <td class="description last"><p>Poet to get shayaris of</p></td>
         </tr>
 
     
@@ -869,8 +421,101 @@
             
 
             
+                <td class="default">
+                
+                    en
+                
+                </td>
+            
 
             <td class="description last"><p>Language to get results in</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>count</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Count of shayaris to return</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sort</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    popularity
+                
+                </td>
+            
+
+            <td class="description last"><p>Result sorting parameters</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>order</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    desc
+                
+                </td>
+            
+
+            <td class="description last"><p>Order of sorting</p></td>
         </tr>
 
     
@@ -911,7 +556,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line147">line 147</a>
+        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line117">line 117</a>
     </li></ul></dd>
     
 
@@ -934,6 +579,365 @@
 
 
 
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidLanguageError</span>
+
+
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidSortParamError</span>
+
+
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidOrderParamError</span>
+
+
+    
+    </div>
+
+</li>
+    </ul>
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;{shayari: String, url: String}>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~getShayarisByTag"><span class="type-signature">(async, inner) </span>getShayarisByTag<span class="signature">(tag, language, count, sort, order)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{shayari: String, poet: String, url: String}>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Fetch shayaris by a specific tag.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tag</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Tag to get shayaris of</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>language</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    en
+                
+                </td>
+            
+
+            <td class="description last"><p>Language to get results in</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>count</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Count of shayaris to return</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sort</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    popularity
+                
+                </td>
+            
+
+            <td class="description last"><p>Result sorting parameters</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>order</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    desc
+                
+                </td>
+            
+
+            <td class="description last"><p>Order of sorting</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line87">line 87</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidLanguageError</span>
+
+
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidSortParamError</span>
+
+
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidOrderParamError</span>
+
+
+    
+    </div>
+
+</li>
+    </ul>
 
 
 <h5>Returns:</h5>
@@ -999,6 +1003,8 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -1024,6 +1030,10 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>Tag to get couplets of</p></td>
         </tr>
@@ -1046,6 +1056,12 @@
 
             
 
+            
+                <td class="default">
+                
+                    en
+                
+                </td>
             
 
             <td class="description last"><p>Language to get results in</p></td>
@@ -1089,7 +1105,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line118">line 118</a>
+        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line161">line 161</a>
     </li></ul></dd>
     
 
@@ -1205,6 +1221,8 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -1230,6 +1248,10 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>Poet to get shayaris of</p></td>
         </tr>
@@ -1252,6 +1274,12 @@
 
             
 
+            
+                <td class="default">
+                
+                    en
+                
+                </td>
             
 
             <td class="description last"><p>Language to get results in</p></td>
@@ -1295,7 +1323,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line133">line 133</a>
+        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line178">line 178</a>
     </li></ul></dd>
     
 
@@ -1318,6 +1346,21 @@
 
 
 
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidLanguageError</span>
+
+
+    
+    </div>
+
+
+    
 
 
 <h5>Returns:</h5>
@@ -1383,6 +1426,8 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -1408,6 +1453,10 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>Tag to get shayaris of</p></td>
         </tr>
@@ -1430,6 +1479,12 @@
 
             
 
+            
+                <td class="default">
+                
+                    en
+                
+                </td>
             
 
             <td class="description last"><p>Language to get results in</p></td>
@@ -1473,7 +1528,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line101">line 101</a>
+        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line143">line 143</a>
     </li></ul></dd>
     
 
@@ -1550,6 +1605,211 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="~getTop5ShayarisByDay"><span class="type-signature">(async, inner) </span>getTop5ShayarisByDay<span class="signature">(date, language)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{shayari: String, poet: String, url: String}>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Get top 5 shayaris of the day for a given date.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>date</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Date in YYYY-MM-DD format</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>language</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    en
+                
+                </td>
+            
+
+            <td class="description last"><p>Language to get results in</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="shayari.js.html">shayari.js</a>, <a href="shayari.js.html#line195">line 195</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">InvalidLanguageError</span>
+
+
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;{shayari: String, poet: String, url: String}>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -1571,7 +1831,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Jun 18 2023 00:45:58 GMT+0530 (India Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Jun 18 2023 10:13:34 GMT+0530 (India Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

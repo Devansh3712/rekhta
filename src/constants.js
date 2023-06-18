@@ -1,4 +1,8 @@
+const rekhta = 'https://www.rekhta.org';
 const languages = ['en', 'hi', 'ur'];
+const sortParams = ['popularity', 'title'];
+const ghazalSortParams = [...sortParams, 'radeef'];
+const orderParams = ['asc', 'desc'];
 const shayariTags = [
 	'aadmi-insaan',
 	'ada',
@@ -50,4 +54,12 @@ const coupletTags = [
 	'top-couplets-on-new-year',
 ];
 
-export { languages, shayariTags, coupletTags };
+export {
+	rekhta,
+	languages,
+	sortParams,
+	ghazalSortParams,
+	orderParams,
+	shayariTags,
+	coupletTags,
+};
