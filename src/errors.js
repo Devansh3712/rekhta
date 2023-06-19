@@ -11,6 +11,9 @@ const InvalidGhazalSortParamError = new Error(
 const InvalidOrderParamError = new Error(
 	"The parameter order can only have values 'asc' or 'desc'",
 );
+const WordNotFoundError = new Error(
+	'No word of the day found for the given date',
+);
 
 export {
 	InvalidTagError,
@@ -18,4 +21,5 @@ export {
 	InvalidSortParamError,
 	InvalidGhazalSortParamError,
 	InvalidOrderParamError,
+	WordNotFoundError,
 };
