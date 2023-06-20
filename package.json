@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "docs": "jsdoc -c ./jsdoc.config.json",
-    "test": "jest"
+    "test": "jest --verbose --detectOpenHandles --forceExit"
   },
   "keywords": [],
   "repository": {
