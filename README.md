@@ -1,6 +1,7 @@
 ## Unofficial Rekhta Wrapper
 
 [![NodeJS CI](https://github.com/Devansh3712/rekhta/actions/workflows/jest.yml/badge.svg)](https://github.com/Devansh3712/rekhta/actions/workflows/jest.yml)
+[![NPM Publish](https://github.com/Devansh3712/rekhta/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/Devansh3712/rekhta/actions/workflows/npm-publish.yml)
 
 This is a web scraping wrapper for [Rekhta](https://www.rekhta.org/?lang=en), made using JavaScript. It scrapes the website using `puppeteer`.
 
