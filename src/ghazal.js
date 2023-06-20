@@ -9,9 +9,11 @@ import {
 } from './constants.js';
 import {
 	InvalidLanguageError,
+	InvalidCountError,
 	InvalidGhazalSortParamError,
 	InvalidOrderParamError,
 } from './errors.js';
+import { isValidCount } from './helpers.js';
 
 /**
  * Fetch ghazals from a Rekhta URL using a specified selector.
@@ -94,6 +96,7 @@ const getGhazals = async (rekhtaUrl, selector, isSinglePoet, count) => {
  * @param	{String} sort - Result sorting parameters
  * @param	{String} order - Order of sorting
  * @throws	{InvalidLanguageError}
+ * @throws	{InvalidCountError}
  * @throws	{InvalidGhazalSortParamError}
  * @throws	{InvalidOrderParamError}
  * @returns	{Promise.<Array.<{ ghazal: String, poet: String, url: String }>>}
@@ -106,6 +109,7 @@ const getGhazalsByTag = async (
 	order = 'desc',
 ) => {
 	if (!languages.includes(language)) throw InvalidLanguageError;
+	if (count && !isValidCount(count)) throw InvalidCountError;
 	if (!ghazalSortParams.includes(sort)) throw InvalidGhazalSortParamError;
 	if (!orderParams.includes(order)) throw InvalidOrderParamError;
 	tag = tag.toLowerCase().replaceAll(' ', '-');
@@ -124,6 +128,7 @@ const getGhazalsByTag = async (
  * @param	{String} sort - Result sorting parameters
  * @param	{String} order - Order of sorting
  * @throws	{InvalidLanguageError}
+ * @throws	{InvalidCountError}
  * @throws	{InvalidGhazalSortParamError}
  * @throws	{InvalidOrderParamError}
  * @returns	{Promise.<Array.<{ nazm: String, url: String }>>}
@@ -136,6 +141,7 @@ const getGhazalsByPoet = async (
 	order = 'desc',
 ) => {
 	if (!languages.includes(language)) throw InvalidLanguageError;
+	if (count && !isValidCount(count)) throw InvalidCountError;
 	if (!ghazalSortParams.includes(sort)) throw InvalidGhazalSortParamError;
 	if (!orderParams.includes(order)) throw InvalidOrderParamError;
 	poet = poet.toLowerCase().replaceAll(' ', '-');

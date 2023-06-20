@@ -11,10 +11,13 @@ import {
 } from './constants.js';
 import {
 	InvalidLanguageError,
+	InvalidCountError,
 	InvalidOrderParamError,
 	InvalidSortParamError,
 	InvalidTagError,
+	DateFormatError,
 } from './errors.js';
+import { today, isValidCount, isValidDate } from './helpers.js';
 
 /**
  * Fetch shayaris from a Rekhta URL using a specificed selector.
@@ -80,6 +83,7 @@ const getShayaris = async (rekhtaUrl, selector, isSinglePoet, count) => {
  * @param	{String} sort - Result sorting parameters
  * @param	{String} order - Order of sorting
  * @throws	{InvalidLanguageError}
+ * @throws	{InvalidCountError}
  * @throws	{InvalidSortParamError}
  * @throws	{InvalidOrderParamError}
  * @returns	{Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
@@ -92,6 +96,7 @@ const getShayarisByTag = async (
 	order = 'desc',
 ) => {
 	if (!languages.includes(language)) throw InvalidLanguageError;
+	if (count && !isValidCount(count)) throw InvalidCountError;
 	if (!sortParams.includes(sort)) throw InvalidSortParamError;
 	if (!orderParams.includes(order)) throw InvalidOrderParamError;
 	tag = tag.toLowerCase().replaceAll(' ', '-');
@@ -110,6 +115,7 @@ const getShayarisByTag = async (
  * @param	{String} sort - Result sorting parameters
  * @param	{String} order - Order of sorting
  * @throws	{InvalidLanguageError}
+ * @throws	{InvalidCountError}
  * @throws	{InvalidSortParamError}
  * @throws	{InvalidOrderParamError}
  * @returns	{Promise.<Array.<{ shayari: String, url: String }>>}
@@ -122,6 +128,7 @@ const getShayarisByPoet = async (
 	order = 'desc',
 ) => {
 	if (!languages.includes(language)) throw InvalidLanguageError;
+	if (count && !isValidCount(count)) throw InvalidCountError;
 	if (!sortParams.includes(sort)) throw InvalidSortParamError;
 	if (!orderParams.includes(order)) throw InvalidOrderParamError;
 	poet = poet.toLowerCase().replaceAll(' ', '-');
@@ -189,10 +196,12 @@ const getTop20ShayarisByPoet = async (poet, language = 'en') => {
  * @async
  * @param	{String} date - Date in YYYY-MM-DD format
  * @param	{String} language - Language to get results in
+ * @throws	{DateFormatError}
  * @throws	{InvalidLanguageError}
  * @returns	{Promise.<Array.<{ shayari: String, poet: String, url: String }>>}
  */
-const getTop5ShayarisByDay = async (date, language = 'en') => {
+const getTop5ShayarisByDay = async (date = today, language = 'en') => {
+	if (!isValidDate(date)) throw DateFormatError;
 	if (!languages.includes(language)) throw InvalidLanguageError;
 	const url = `${rekhta}/archives/${date}/TopFive?lag=${language}`;
 	const shayaris = await getShayaris(url, '.owl-item', false, false);

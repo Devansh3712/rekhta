@@ -1,3 +1,4 @@
+import { shayariTags, coupletTags } from './constants.js';
 import { getGhazalsByPoet, getGhazalsByTag } from './ghazal.js';
 import { getNazmsByPoet, getNazmsByTag } from './nazm.js';
 import {
@@ -11,6 +12,8 @@ import {
 import { getWordOfTheDay } from './word.js';
 
 export {
+	shayariTags,
+	coupletTags,
 	getGhazalsByPoet,
 	getGhazalsByTag,
 	getNazmsByPoet,

@@ -4,9 +4,11 @@ import puppeteer from 'puppeteer';
 import { rekhta, languages, sortParams, orderParams } from './constants.js';
 import {
 	InvalidLanguageError,
+	InvalidCountError,
 	InvalidOrderParamError,
 	InvalidSortParamError,
 } from './errors.js';
+import { isValidCount } from './helpers.js';
 
 /**
  * Fetch nazms from a Rekhta URL using a specified selector.
@@ -89,6 +91,7 @@ const getNazms = async (rekhtaUrl, selector, isSinglePoet, count) => {
  * @param	{String} sort - Result sorting parameters
  * @param	{String} order - Order of sorting
  * @throws	{InvalidLanguageError}
+ * @throws	{InvalidCountError}
  * @throws	{InvalidSortParamError}
  * @throws	{InvalidOrderParamError}
  * @returns	{Promise.<Array.<{ nazm: String, poet: String, url: String }>>}
@@ -101,6 +104,7 @@ const getNazmsByTag = async (
 	order = 'desc',
 ) => {
 	if (!languages.includes(language)) throw InvalidLanguageError;
+	if (count && !isValidCount(count)) throw InvalidCountError;
 	if (!sortParams.includes(sort)) throw InvalidSortParamError;
 	if (!orderParams.includes(order)) throw InvalidOrderParamError;
 	tag = tag.toLowerCase().replaceAll(' ', '-');
@@ -119,6 +123,7 @@ const getNazmsByTag = async (
  * @param	{String} sort - Result sorting parameters
  * @param	{String} order - Order of sorting
  * @throws	{InvalidLanguageError}
+ * @throws	{InvalidCountError}
  * @throws	{InvalidSortParamError}
  * @throws	{InvalidOrderParamError}
  * @returns	{Promise.<Array.<{ nazm: String, url: String }>>}
@@ -131,6 +136,7 @@ const getNazmsByPoet = async (
 	order = 'desc',
 ) => {
 	if (!languages.includes(language)) throw InvalidLanguageError;
+	if (count && !isValidCount(count)) throw InvalidCountError;
 	if (!sortParams.includes(sort)) throw InvalidSortParamError;
 	if (!orderParams.includes(order)) throw InvalidOrderParamError;
 	poet = poet.toLowerCase().replaceAll(' ', '-');

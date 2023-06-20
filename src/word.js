@@ -1,17 +1,20 @@
 /** @module word */
 import puppeteer from 'puppeteer';
 
-import { WordNotFoundError } from './errors.js';
+import { WordNotFoundError, DateFormatError } from './errors.js';
+import { today, isValidDate } from './helpers.js';
 
 /**
  * Fetch the word of the day for a given date.
  *
  * @async
  * @param	{string} date - Date in YYYY-MM-DD format
+ * @throws	{DateFormatError}
  * @throws	{WordNotFoundError}
  * @returns	{Promise.<{ english: String, hindi: String, urdu: String, meaning: String, usage: String }>}
  */
-const getWordOfTheDay = async (date) => {
+const getWordOfTheDay = async (date = today) => {
+	if (!isValidDate(date)) throw DateFormatError;
 	const rekhtaUrl = `https://www.rekhta.org/archives/${date}/WordOfTheDays/`;
 	const browser = await puppeteer.launch({
 		headless: 'new',
