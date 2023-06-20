@@ -1,6 +1,6 @@
 {
   "name": "rekhta",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Unofficial wrapper for Rekhta",
   "main": "src/index.js",
   "type": "module",
