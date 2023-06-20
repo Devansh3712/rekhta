@@ -1,8 +1,8 @@
 {
   "name": "rekhta",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.1",
+  "description": "Unofficial wrapper for Rekhta",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
     "docs": "jsdoc -c ./jsdoc.config.json",
